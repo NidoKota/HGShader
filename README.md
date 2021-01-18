@@ -5,8 +5,6 @@ https://github.com/NidoKota/HGShader/blob/main/README.md
 
 -->
 
-###### HandyGraphicでピクセルシェーダーを動かす用途不明のプログラム
-
 # HGShader
 
 <img width="275" alt="" src="ManualImages/0.gif"> <img width="275" alt="" src="ManualImages/1.gif"> <img width="275" alt="" src="ManualImages/2.gif">
