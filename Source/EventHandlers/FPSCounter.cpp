@@ -8,7 +8,7 @@ FPSCounter::FPSCounter(double* t, float fpsUpdateTime)
 
 float FPSCounter::GetFPS()
 {
-	return pastFPS;
+    return pastFPS;
 }
 
 void FPSCounter::Start()
@@ -22,9 +22,9 @@ void FPSCounter::FlameUpdate()
     fpsFrameCount++;
 
     if(deltaTime >= fpsUpdateTime)
-	{
-	    pastFPS = fpsFrameCount / deltaTime;
-	    fpsFrameCount = 0;
-	    fpsPrevTime = *t;
-	}
+    {
+        pastFPS = fpsFrameCount / deltaTime;
+        fpsFrameCount = 0;
+        fpsPrevTime = *t;
+    }
 }

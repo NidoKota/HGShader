@@ -7,16 +7,16 @@ DoubleLayerDisplayer::DoubleLayerDisplayer(Func draw)
 
 void DoubleLayerDisplayer::Start()
 {
-	if(!once)
-	{
-		layers = HgWAddDoubleLayer(0);
-		once = true;
-	}
+    if(!once)
+    {
+        layers = HgWAddDoubleLayer(0);
+        once = true;
+    }
 }
 
 void DoubleLayerDisplayer::FlameUpdate()
 {
-	hiddenLayerID = HgLSwitch(&layers);
+    hiddenLayerID = HgLSwitch(&layers);
     HgLClear(hiddenLayerID);
 
     draw(hiddenLayerID);
@@ -25,14 +25,14 @@ void DoubleLayerDisplayer::FlameUpdate()
 void DoubleLayerDisplayer::SetActive(bool enabled)
 {
     EventHandler::SetActive(enabled);
-	if(!enabled)
-	{
-	    HgLClear(layers.display);
-	    HgLClear(layers.hidden);
-	}
+    if(!enabled)
+    {
+        HgLClear(layers.display);
+        HgLClear(layers.hidden);
+    }
 }
     
 doubleLayer DoubleLayerDisplayer::GetDoubleLayer()
 {
-	return layers;
+    return layers;
 }

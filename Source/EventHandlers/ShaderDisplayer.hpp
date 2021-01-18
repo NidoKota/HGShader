@@ -36,11 +36,11 @@ private :
     bool doColorUpdate;
     bool once;
 
-	void FlameUpdate() override;
+    void FlameUpdate() override;
     int FindDivisibleNum(int value, int start, int isNextNum);
     void SetPixCount(int pixCount);
-	void PixUpdate(int x, int y);
-	void PixRender(int x, int y);
+    void PixUpdate(int x, int y);
+    void PixRender(int x, int y);
     
     template<typename First, typename... Rest>
     void RoundUp(const First& first, const Rest&... rest)
@@ -57,19 +57,19 @@ public :
     template<typename First, typename... Rest>
     ShaderDisplayer(double* t, const First& first, const Rest&... rest)
     {
-	    this->t = t;
+        this->t = t;
         RoundUp(first, rest...);
 
-	    shaderSpeed = 5;
-	    shaderFuncsSize = shaderFuncs.size();
-	    renderColorsIndex = -1;
-	    bufferColorsIndex = -2;
+        shaderSpeed = 5;
+        shaderFuncsSize = shaderFuncs.size();
+        renderColorsIndex = -1;
+        bufferColorsIndex = -2;
         renderCount = 1;
-	    SetPixCount(FindDivisibleNum(WINDOW_SIZE, 50, -1));
+        SetPixCount(FindDivisibleNum(WINDOW_SIZE, 50, -1));
     }
 
     //再度初期化処理を行う
-	void Start() override;
+    void Start() override;
     //ピクセルの個数を取得
     int GetPixCount();
     //登録されたシェーダーの個数を取得

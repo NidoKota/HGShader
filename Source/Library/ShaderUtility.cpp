@@ -277,7 +277,7 @@ vec3 _not(const vec3 x)
 //hgcolorを0~1の浮動小数点RGBに変換する
 vec3 hgcolorToRGB(const hgcolor hgc)
 {
-	return vec3((hgc >> 16) / 255.f, ((hgc & 0x00FF00) >> 8) / 255.f, (hgc & 0x0000FF) / 255.f);
+    return vec3((hgc >> 16) / 255.f, ((hgc & 0x00FF00) >> 8) / 255.f, (hgc & 0x0000FF) / 255.f);
 }
 
 //2次元の擬似乱数
@@ -389,30 +389,30 @@ template <typename T> T remap(const T v, const T inMin, const T inMax, const T o
 //スクリーン合成
 vec3 screenSynthesis(const vec3 def, const vec3 syn)
 {
-	return def + syn - def * syn;
+    return def + syn - def * syn;
 }
 
 vec3 rainbow(const float v)
 {
-	return vec3((sin(v * 6.f) + 1.f) / 2.f,
-		(sin((v + (1.f / 3.f)) * 6.f) + 1.f) / 2.f,
-		(sin((v + (2.f / 3.f)) * 6.f) + 1.f) / 2.f);
+    return vec3((sin(v * 6.f) + 1.f) / 2.f,
+        (sin((v + (1.f / 3.f)) * 6.f) + 1.f) / 2.f,
+        (sin((v + (2.f / 3.f)) * 6.f) + 1.f) / 2.f);
 }
 
 //////////////////////以下vec3関係の関数//////////////////////
 
 vec3::vec3()
 {
-	this->x = 0;
-	this->y = 0;
-	this->z = 0;
+    this->x = 0;
+    this->y = 0;
+    this->z = 0;
 }
 
 vec3::vec3(const float f)
 {
-	this->x = f;
-	this->y = f;
-	this->z = f;
+    this->x = f;
+    this->y = f;
+    this->z = f;
 }
 
 vec3::vec3(const float x, const float y)

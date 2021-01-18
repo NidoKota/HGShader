@@ -18,8 +18,8 @@ private :
     unsigned int inputDown;
     unsigned int inputUp;
 
-	void Start() override;
-	void FlameUpdate() override;
+    void Start() override;
+    void FlameUpdate() override;
 
     template<typename First, typename... Rest>
     void RoundUp(const First& first, const Rest&... rest)

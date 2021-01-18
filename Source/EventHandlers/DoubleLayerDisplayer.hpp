@@ -9,15 +9,15 @@ struct DoubleLayerDisplayer : public EventHandler
 {
     using Func = void (*)(int);
 
-	private : 
+    private : 
     doubleLayer layers;
     Func draw;
     bool once;
     int hiddenLayerID;
 
     protected : 
-	void Start() override;
-	void FlameUpdate() override;
+    void Start() override;
+    void FlameUpdate() override;
 
     public : 
     //描画する処理がある関数を登録する(引数のintはlayerID)
