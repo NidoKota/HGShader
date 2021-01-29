@@ -87,8 +87,8 @@ float star(vec3 p, int n, float t, float size)
     float a = 2.f * M_PI / ((float)n * 2.f);
     float aco = cos(a);
     float asi = sin(a);
-    vec3 v32[] = {vec3(aco, -asi), vec3(asi, aco)};
-    vec3 r = mul3x333(p, v32);
+    vec3 v33[3] = {vec3(aco, -asi), vec3(asi, aco), 0};
+    vec3 r = mul3x333(p, v33);
     return (polygon(p, n, size) - polygon(r, n, size) * t) / (1.f - t);
 }
 
