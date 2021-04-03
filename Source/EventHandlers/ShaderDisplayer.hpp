@@ -3,6 +3,7 @@
 #include <vector>
 #include <thread>
 #include <future>
+#include <chrono>
 #include "../Library/Defines.hpp"
 #include "../Library/ShaderUtility.hpp"
 #include "../Library/Event.hpp"
@@ -23,6 +24,8 @@ private :
     double pixSize;
     double shaderTime;
     double shaderTimeFitter;
+    double pixUpdateDeltaTime;
+    double pixRenderDeltaTime;
     float shaderSpeed;
     int hiddenLayerID;
     int shaderFuncsSize;
@@ -32,7 +35,6 @@ private :
     int renderColorsIndex;
     int bufferColorsIndex;
     int renderCount;
-    unsigned int updatePixCount;
     bool doColorUpdate;
     bool once;
 
@@ -76,8 +78,6 @@ public :
     int GetShaderFuncsSize();
     //現在実行されてるシェーダーの要素番号を取得
     int GetShaderFuncsIndex();
-    //フレームを描画するのに、どれだけのピクセルをアップデートしたかを取得
-    unsigned int GetUpdatePixCount();
     //現在のシェーダーの再生速度を取得
     float GetShaderSpeed();
     //シェーダーの再生速度を変更
@@ -88,4 +88,8 @@ public :
     void DecreasePixCount();
     //シェーダーを切り替える
     void SetShaderFuncsIndex(int index);
+    //Shaderの計算にかかった時間を取得
+    double GetPixUpdateDeltaTime();
+    //ピクセルのレンダリング時間を取得
+    double GetPixRenderDeltaTime();
 };

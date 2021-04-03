@@ -12,19 +12,22 @@ void ShaderDisplayer::Start()
 
 void ShaderDisplayer::FlameUpdate()
 {
+    using namespace std::chrono;
+    
     hiddenLayerID = HgLSwitch(&layers);
     HgLCopy(layers.hidden, layers.display);
-    updatePixCount = 0;
 
     shaderTime = *t * (double)GetShaderSpeed() - shaderTimeFitter;
 
     //Shaderの計算をする
     pixUpdateFuture = std::async(std::launch::async, [&]()
     {
+        system_clock::time_point sT = system_clock::now();
         for (int x = 0; x < GetPixCount(); x++)
         {
             for (int y = 0; y < GetPixCount(); y++) PixUpdate(x, y);
         }
+        pixUpdateDeltaTime = clamp(duration_cast<milliseconds>(system_clock::now() - sT).count() / 1000.f, 0.f, 1.f);
     });
 
     if(renderCount >= 2)
@@ -32,11 +35,14 @@ void ShaderDisplayer::FlameUpdate()
         //ピクセルをレンダリングする
         pixRenderFuture = std::async(std::launch::async, [&]()
         {
+            system_clock::time_point sT = std::chrono::system_clock::now();
             for (int x = 0; x < GetPixCount(); x++)
             {
                 for (int y = 0; y < GetPixCount(); y++) PixRender(x, y);
             }
+            pixRenderDeltaTime = clamp(duration_cast<milliseconds>(system_clock::now() - sT).count() / 1000.f, 0.f, 1.f);
         });
+
         pixRenderFuture.wait();
     }
 
@@ -71,7 +77,6 @@ void ShaderDisplayer::PixRender(int x, int y)
         HgWSetFillColor(hiddenLayerID, colors[renderColorsIndex][x][y].ToHGColor());
         HgWBoxFill(hiddenLayerID, (double)x * pixSize, (double)y * pixSize, pixSize, pixSize, 0);
         doColorUpdate = false;
-        updatePixCount++;
     }
 }
 
@@ -163,7 +168,12 @@ void ShaderDisplayer::SetShaderFuncsIndex(int index)
     }
 }
 
-unsigned int ShaderDisplayer::GetUpdatePixCount()
+double ShaderDisplayer::GetPixUpdateDeltaTime()
 {
-    return updatePixCount;
+    return pixUpdateDeltaTime;
+}
+
+double ShaderDisplayer::GetPixRenderDeltaTime()
+{
+    return pixRenderDeltaTime;
 }
