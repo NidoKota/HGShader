@@ -114,8 +114,9 @@ HGShaderでは、`std::chrono::system_clock`を使用しました<br>
 現在のdeltaTimeを比較し、Threadを止める時間を決めているわけです<br>
 (これらの処理は`Main.cpp`内にあります)<br>
 <br>
-しかしこの比較の仕方が適当なので、FPS数が`TARGET_FPS`を大幅に超えることがあります<br>
-前のdeltaTimeと今のdeltaTimeで微分して、次の状態を予測する必要があると考えています<br>
+(21/4/3 解決)<br>
+~~しかしこの比較の仕方が適当なので、FPS数が`TARGET_FPS`を大幅に超えることがあります<br>
+前のdeltaTimeと今のdeltaTimeで微分して、次の状態を予測する必要があると考えています<br>~~
 
 # キー入力周りの機能を改善する
 `HgEventNonBlocking`関数などで受け取れるキー入力の情報は、入力されているか、離されているか の2種類です<br>

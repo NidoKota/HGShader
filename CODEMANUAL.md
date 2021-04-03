@@ -89,11 +89,17 @@ int shaderFuncsSize = shaderDisplayer.GetShaderFuncsSize();
 //現在実行されてるシェーダーの要素番号を取得
 int shaderFuncsIndex = shaderDisplayer.GetShaderFuncsIndex();
 
-//フレームを描画するのに、どれだけのピクセルをアップデートしたかを取得
-unsigned int updatePixCount = shaderDisplayer.GetUpdatePixCount();
-
 //現在のシェーダーの再生速度を取得
 float shaderSpeed = shaderDisplayer.GetShaderSpeed();
+
+//Shaderの計算にかかった時間を取得
+double pixUpdateDt = shaderDisplayer.GetPixUpdateDeltaTime();
+
+//ピクセルのレンダリング時間を取得
+double pixRenderDt = shaderDisplayer.GetPixRenderDeltaTime();
+
+//廃止
+//unsigned int updatePixCount = shaderDisplayer.GetUpdatePixCount();
 ```
 
 # EventHandlers/InputManager.cpp
@@ -140,7 +146,7 @@ FPSCounter fpsCounter = FPSCounter(&t, 0.5f);
 fpsCounter.Subscribe(flameUpdateDelegate);
 
 //再度初期化処理を行う
-inputManager.Start();
+fpsCounter.Start();
 
 //起動状態を設定する
 fpsCounter.SetActive(false);
@@ -150,7 +156,6 @@ bool active = fpsCounter.GetActive();
 ```
 
 ```C++
-
 //FPS数を取得
 float fps = inputManager.GetFPS();
 ```
@@ -177,5 +182,5 @@ bool active = doubleLayerDisplayer.GetActive();
 
 ```C++
 //使用しているダブルレイヤーを取得
-doubleLayer dl = GetDoubleLayer();
+doubleLayer dl = doubleLayerDisplayer.GetDoubleLayer();
 ```
