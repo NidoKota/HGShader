@@ -20,22 +20,22 @@ void InputManager::FlameUpdate()
     prevInput = input;
 }
 
-bool InputManager::GetKey(unsigned int key)
+bool InputManager::GetKey(int key)
 {
     return input & (1 << observeKeyValues[key]);
 }
 
-bool InputManager::GetKeyDown(unsigned int key)
+bool InputManager::GetKeyDown(int key)
 {
     return inputDown & (1 << observeKeyValues[key]);
 }
 
-bool InputManager::GetKeyUp(unsigned int key)
+bool InputManager::GetKeyUp(int key)
 {
     return inputUp & (1 << observeKeyValues[key]);
 }
 
-unsigned int InputManager::GetAnyKey()
+int InputManager::GetAnyKey()
 {
     return input;
 }

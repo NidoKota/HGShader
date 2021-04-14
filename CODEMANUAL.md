@@ -99,7 +99,7 @@ double pixUpdateDt = shaderDisplayer.GetPixUpdateDeltaTime();
 double pixRenderDt = shaderDisplayer.GetPixRenderDeltaTime();
 
 //廃止
-//unsigned int updatePixCount = shaderDisplayer.GetUpdatePixCount();
+//int updatePixCount = shaderDisplayer.GetUpdatePixCount();
 ```
 
 # EventHandlers/InputManager.cpp
@@ -132,7 +132,7 @@ bool aKeyUp = inputManager.GetKeyUp('a');
 
 //どのキーが押されているかを取得
 //返り値はビットフラグになっていて、インスタンス時に指定したキーの順番で右からビットが立つ
-unsigned int keyFlags = inputManager.GetAnyKey();
+int keyFlags = inputManager.GetAnyKey();
 ```
 
 # EventHandlers/FPSCounter.cpp
