@@ -68,15 +68,15 @@ void ShaderDisplayer::PixRender(int x, int y)
     if(renderCount > 2)
     {
         //前回と比べてピクセルの色が変わったかどうか
-        if(colors[renderColorsIndex][x][y] != colors[bufferColorsIndex][x][y]) doColorUpdate = true;
+        if(colors[renderColorsIndex][x][y] != colors[bufferColorsIndex][x][y]) shouldColorUpdate = true;
     }
     
-    if(renderCount <= 2 || doColorUpdate)
+    if(renderCount <= 2 || shouldColorUpdate)
     {
         //色を設定してレンダリングする
         HgWSetFillColor(hiddenLayerID, colors[renderColorsIndex][x][y].ToHGColor());
         HgWBoxFill(hiddenLayerID, (double)x * pixSize, (double)y * pixSize, pixSize, pixSize, 0);
-        doColorUpdate = false;
+        shouldColorUpdate = false;
     }
 }
 

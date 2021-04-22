@@ -55,9 +55,11 @@ Sourceフォルダ内で以下のコードを実行します<br>
 - PixCount : 現在表示されているピクセルの数<br>
 - InputKeys : 入力のビットフラグ<br>
 - グラフ : <br>
-上から以下の情報を表示する<br>
-シェーダーの計算時間、ピクセルのレンダリング時間、DeltaTime、SleepTime<br>
-縦線は時間の長さを表し、1つ目の線は10msを表す<br>
+&nbsp;UP : シェーダーの計算時間<br>
+&nbsp;RT : ピクセルのレンダリング時間<br>
+&nbsp;DT : DeltaTime<br>
+&nbsp;ST : SleepTime<br>
+&nbsp;(目盛りは10ms)<br>
 
 # サンプルにシェーダーを追加する
 `Main.cpp` 内のShaderDisplayerの引数にシェーダーを登録すると表示されるようになります<br>

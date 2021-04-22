@@ -35,7 +35,7 @@ private :
     int renderColorsIndex;
     int bufferColorsIndex;
     int renderCount;
-    bool doColorUpdate;
+    bool shouldColorUpdate;
     bool once;
 
     void FlameUpdate() override;

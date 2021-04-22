@@ -17,19 +17,27 @@ ShaderDisplayer shaderDisplayer = ShaderDisplayer(&t, RainbowCircleShader, Heart
 DoubleLayerDisplayer infoDisplayer = DoubleLayerDisplayer([](int layerID)
 {
     //画面に表示する情報
+    HgWSetFont(layerID, HG_HB, 15);
     HgWSetColor(layerID, vec3(0.5).ToHGColor());
+    HgWSetFillColor(layerID, vec3(0.5).ToHGColor());
     HgWText(layerID, 0, WINDOW_SIZE - 15, "FPS : %5.1f FPSLimit : %s", fpsCounter.GetFPS(), isFPSLimitEnabled ? "ON" : "OFF");
     HgWText(layerID, 0, WINDOW_SIZE - 30, "Time : %3.1f ShaderSpeed : %3.2f", t, shaderDisplayer.GetShaderSpeed());
     HgWText(layerID, 0, WINDOW_SIZE - 45, "SleepTime : %1.3f DeltaTime : %1.3f", sleepTime, deltaTime);
     HgWText(layerID, 0, WINDOW_SIZE - 60, "Window : %dx%d PixCount : %dx%d", WINDOW_SIZE, WINDOW_SIZE, shaderDisplayer.GetPixCount(), shaderDisplayer.GetPixCount());
     HgWText(layerID, 0, WINDOW_SIZE - 75, "InputKeys : %s", std::bitset<10>(inputManager.GetAnyKey()).to_string().c_str());
 
-    HgWSetFillColor(layerID, vec3(0.5).ToHGColor());
-    HgWBoxFill(layerID, 0, WINDOW_SIZE - 80, shaderDisplayer.GetPixUpdateDeltaTime() * 1000, 2, false);
-    HgWBoxFill(layerID, 0, WINDOW_SIZE - 85, shaderDisplayer.GetPixRenderDeltaTime() * 1000, 2, false);
-    HgWBoxFill(layerID, 0, WINDOW_SIZE - 90, deltaTime * 1000, 2, false);
-    HgWBoxFill(layerID, 0, WINDOW_SIZE - 95, sleepTime * 1000, 2, false);
-    for (int i = 1; i <= 10; i++) HgWBoxFill(layerID, i * 10, WINDOW_SIZE - 97, 1.5f, 21, false);
+    //上から、PixUpdateTime、PixRenderTime、DeltaTime、SleepTimeのグラフを表示
+    HgWSetFont(layerID, HG_HB, 10);
+    HgWText(layerID, 0, WINDOW_SIZE - 88, "UP");
+    HgWText(layerID, 0, WINDOW_SIZE - 96, "RT");
+    HgWText(layerID, 0, WINDOW_SIZE - 104, "DT");
+    HgWText(layerID, 0, WINDOW_SIZE - 112, "ST");
+    HgWBoxFill(layerID, 15, WINDOW_SIZE - 88 + 6, shaderDisplayer.GetPixUpdateDeltaTime() * 1000, 2.5f, false);
+    HgWBoxFill(layerID, 15, WINDOW_SIZE - 96 + 6, shaderDisplayer.GetPixRenderDeltaTime() * 1000, 2.5f, false);
+    HgWBoxFill(layerID, 15, WINDOW_SIZE - 104 + 6, deltaTime * 1000, 2.5f, false);
+    HgWBoxFill(layerID, 15, WINDOW_SIZE - 112 + 6, sleepTime * 1000, 2.5f, false);
+    //10msごとに線を描画
+    for (int i = 0; i <= 10; i++) HgWBoxFill(layerID, 15 + i * 10, WINDOW_SIZE - 110, 1.5f, 32, false);
 });
 
 int main()
@@ -89,7 +97,7 @@ void MainFlameUpdate()
     if(inputManager.GetKeyDown('.')) shaderDisplayer.SetShaderSpeed(clamp((float)shaderDisplayer.GetShaderSpeed() + 0.25f, 0.f, 10.f));
     if(inputManager.GetKeyDown('r'))
     {
-        sT = std::chrono::system_clock::now();
+        t = 0;
         shaderDisplayer.Start();
         fpsCounter.Start();
     }
