@@ -112,4 +112,5 @@ Inigo Quilez - iq/2013<br>
 <a href="https://www.shadertoy.com/view/XdXGW8" target="_blank" rel="noopener noreferrer">https://www.shadertoy.com/view/XdXGW8</a><br>
 
 # ライセンス
-<a href="LICENSE" target="_blank" rel="noopener noreferrer">MIT License</a>
+<a href="LICENSE" target="_blank" rel="noopener noreferrer">MIT License</a><br>
+何か変更したい点などあればご連絡ください
