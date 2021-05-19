@@ -417,39 +417,39 @@ vec3::vec3(const float f)
 
 vec3::vec3(const float x, const float y)
 {
-    this -> x = x;
-    this -> y = y;
-    this -> z = 0;
+    this->x = x;
+    this->y = y;
+    this->z = 0;
 }
 
 vec3::vec3(const float x, const float y, const float z)
 {
-    this -> x = x;
-    this -> y = y;
-    this -> z = z;
+    this->x = x;
+    this->y = y;
+    this->z = z;
 }
 
 vec3 vec3::SetAll(const float f)
 {
-    this -> x = f;
-    this -> y = f;
-    this -> z = f;
+    this->x = f;
+    this->y = f;
+    this->z = f;
     return *this;
 }
 
 vec3 vec3::SetAll(const float x, const float y)
 {
-    this -> x = x;
-    this -> y = y;
-    this -> z = 0;
+    this->x = x;
+    this->y = y;
+    this->z = 0;
     return *this;
 }
 
 vec3 vec3::SetAll(const float x, const float y, const float z)
 {
-    this -> x = x;
-    this -> y = y;
-    this -> z = z;
+    this->x = x;
+    this->y = y;
+    this->z = z;
     return *this;
 }
 

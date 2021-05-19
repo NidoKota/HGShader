@@ -82,14 +82,12 @@ void ShaderDisplayer::PixRender(int x, int y)
 
 void ShaderDisplayer::IncreasePixCount()
 {
-    int divisibleNum = FindDivisibleNum(WINDOW_SIZE, GetPixCount() + 1, 1);
-    SetPixCount(clamp(divisibleNum, MIN_PIX_COUNT, WINDOW_SIZE));
+    SetPixCount(FindDivisibleNum(WINDOW_SIZE, GetPixCount() + 1, true));
 }
 
 void ShaderDisplayer::DecreasePixCount()
 {
-    int divisibleNum = FindDivisibleNum(WINDOW_SIZE, GetPixCount() - 1, 0);
-    SetPixCount(clamp(divisibleNum, MIN_PIX_COUNT, WINDOW_SIZE));
+    SetPixCount(FindDivisibleNum(WINDOW_SIZE, GetPixCount() - 1, false));
 }
 
 int ShaderDisplayer::GetPixCount()
@@ -112,6 +110,9 @@ void ShaderDisplayer::SetPixCount(int pixCount)
 {
     if(renderCount != 0)
     {
+        pixCount = clamp(pixCount, MIN_PIX_COUNT, WINDOW_SIZE);
+
+        //TODO:確保済みのメモリは削除させないようにする
         //前に使ってたメモリを消す
         if(&colors[0][0] != nullptr)
         {
@@ -140,7 +141,7 @@ void ShaderDisplayer::SetPixCount(int pixCount)
     }
 }
 
-int ShaderDisplayer::FindDivisibleNum(int value, int start, int isNextNum)
+int ShaderDisplayer::FindDivisibleNum(int value, int start, bool isNextNum)
 {
     int i = start;
     for(; i < value; i += isNextNum ? 1 : -1) if (value % i == 0) break;

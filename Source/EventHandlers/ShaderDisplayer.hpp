@@ -39,7 +39,7 @@ private :
     bool once;
 
     void FlameUpdate() override;
-    int FindDivisibleNum(int value, int start, int isNextNum);
+    int FindDivisibleNum(int value, int start, bool isNextNum);
     void SetPixCount(int pixCount);
     void PixUpdate(int x, int y);
     void PixRender(int x, int y);

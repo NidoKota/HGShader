@@ -36,7 +36,7 @@ DoubleLayerDisplayer infoDisplayer = DoubleLayerDisplayer([](int layerID)
     HgWBoxFill(layerID, 15, WINDOW_SIZE - 96 + 6, shaderDisplayer.GetPixRenderDeltaTime() * 1000, 2.5f, false);
     HgWBoxFill(layerID, 15, WINDOW_SIZE - 104 + 6, deltaTime * 1000, 2.5f, false);
     HgWBoxFill(layerID, 15, WINDOW_SIZE - 112 + 6, sleepTime * 1000, 2.5f, false);
-    //10msごとに線を描画
+    //グラフの縦線を描画
     for (int i = 0; i <= 10; i++) HgWBoxFill(layerID, 15 + i * 10, WINDOW_SIZE - 110, 1.5f, 32, false);
 });
 
