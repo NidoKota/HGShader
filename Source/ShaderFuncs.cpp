@@ -227,18 +227,21 @@ vec3 SpaceShader(vec3 uv, float t)
     return floor(color * 9.f) / 9.f;
 }
 
-float boxFunc(vec3 p){
+float boxFunc(vec3 p)
+{
     vec3 q = abs(p);
     return length(max(q - vec3(0.5f, 0.f, 0.5f), 0.f)) - 0.3f;
 }
 
-float torusFunc(vec3 p){
+float torusFunc(vec3 p)
+{
     vec3 t = vec3(0.65f, 0.2f);
     vec3 r = vec3(length(vec3(p.x, p.y)) - t.x, p.z);
     return length(r) - t.y;
 }
 
-float blockFunc(vec3 p){
+float blockFunc(vec3 p)
+{
     float d1 = torusFunc(p);
     float d2 = boxFunc(p);
     return max(-d1, d2);
