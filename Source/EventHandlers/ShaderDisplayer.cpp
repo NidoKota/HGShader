@@ -22,6 +22,7 @@ void ShaderDisplayer::FlameUpdate()
     //Shaderの計算をする
     pixUpdateFuture = std::async(std::launch::async, [&]()
     {
+        //TODO:既に求めている起動からの時間から計算する
         system_clock::time_point sT = system_clock::now();
         for (int x = 0; x < GetPixCount(); x++)
         {

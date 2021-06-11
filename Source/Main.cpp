@@ -7,7 +7,7 @@ double prevT = 0;
 double deltaTime = 0;
 double sleepTime = 0;
 bool isFPSLimitEnabled = true;
-bool isPraying = true;
+bool isPlaying = true;
 
 Delegate flameUpdateDelegate = Delegate();
 
@@ -52,7 +52,7 @@ int main()
     shaderDisplayer.Subscribe(flameUpdateDelegate);
     infoDisplayer.Subscribe(flameUpdateDelegate);
 
-    while(isPraying)
+    while(isPlaying)
     {
         //FlameUpdate開始前の時間を取得
         sT = system_clock::now();
@@ -90,7 +90,7 @@ void MainFlameUpdate()
     if(inputManager.GetKeyDown(HG_D_ARROW)) shaderDisplayer.DecreasePixCount();
     if(inputManager.GetKeyDown(HG_R_ARROW)) shaderDisplayer.SetShaderFuncsIndex(shaderIndex + 1 > shaderSize - 1 ? 0 : shaderIndex + 1);
     if(inputManager.GetKeyDown(HG_L_ARROW)) shaderDisplayer.SetShaderFuncsIndex(shaderIndex - 1 < 0 ? shaderSize - 1 : shaderIndex - 1);
-    if(inputManager.GetKeyDown('q')) isPraying = false;
+    if(inputManager.GetKeyDown('q')) isPlaying = false;
     if(inputManager.GetKeyDown('f')) isFPSLimitEnabled = !isFPSLimitEnabled;
     if(inputManager.GetKeyDown(' ')) infoDisplayer.SetActive(!infoDisplayer.GetActive());
     if(inputManager.GetKeyDown(',')) shaderDisplayer.SetShaderSpeed(clamp((float)shaderDisplayer.GetShaderSpeed() - 0.25f, 0.f, 10.f));
