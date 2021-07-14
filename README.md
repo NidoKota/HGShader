@@ -19,6 +19,9 @@ HGShaderはそんなニッチで意味不明な需要を満たすプログラム
 初期状態の50x50ピクセルで2500個のHgBoxFillが表示されます<br>
 FPS数(FramePerSecond)を稼ぐためにいくつかの軽量化も行っています<br>
 
+# 謎の紹介ビデオ
+https://user-images.githubusercontent.com/36328961/125702413-61206a6e-7483-4179-ba0f-f18752d57c3d.mp4
+
 # サンプルの起動方法
 サンプルシェーダーが動く実行ファイルがあります<br>
 HandyGraphicを起動させた状態で、Sampleをダブルクリックします
@@ -96,9 +99,6 @@ GLSLのatan関数は、math.hのatan関数(挙動が異なる)と名前が被っ
 
 # HandyGraphicの知見
 <a href="HGKNOWLEDGE.md" target="_blank" rel="noopener noreferrer">HGKNOWLEDGE</a> をご覧ください<br>
-
-# 謎の紹介ビデオ
-https://user-images.githubusercontent.com/36328961/125702413-61206a6e-7483-4179-ba0f-f18752d57c3d.mp4<br>
 
 # 感想
 半年前の3Dの図形描画より滑らかになって楽しかった<br>
