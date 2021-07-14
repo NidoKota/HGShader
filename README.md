@@ -97,6 +97,9 @@ GLSLのatan関数は、math.hのatan関数(挙動が異なる)と名前が被っ
 # HandyGraphicの知見
 <a href="HGKNOWLEDGE.md" target="_blank" rel="noopener noreferrer">HGKNOWLEDGE</a> をご覧ください<br>
 
+# 謎の紹介ビデオ
+https://user-images.githubusercontent.com/36328961/125702413-61206a6e-7483-4179-ba0f-f18752d57c3d.mp4<br>
+
 # 感想
 半年前の3Dの図形描画より滑らかになって楽しかった<br>
 この形式で初期のウィザードリィとかDoomとか移植できそう<br>
