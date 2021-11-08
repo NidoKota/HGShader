@@ -19,7 +19,7 @@ HGShaderはそんなニッチで意味不明な需要を満たすプログラム
 初期状態の50x50ピクセルで2500個のHgBoxFillが表示されます<br>
 FPS数(FramePerSecond)を稼ぐためにいくつかの軽量化も行っています<br>
 
-# 謎の紹介ビデオ
+# 紹介動画
 https://user-images.githubusercontent.com/36328961/125702413-61206a6e-7483-4179-ba0f-f18752d57c3d.mp4
 
 # サンプルの起動方法
