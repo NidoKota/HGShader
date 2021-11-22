@@ -23,13 +23,11 @@ FPS数(FramePerSecond)を稼ぐためにいくつかの軽量化も行ってい�
 https://user-images.githubusercontent.com/36328961/125702413-61206a6e-7483-4179-ba0f-f18752d57c3d.mp4
 
 # サンプルの起動方法
-サンプルシェーダーが動く実行ファイルがあります<br>
-HandyGraphicを起動させた状態で、Sampleをダブルクリックします
+サンプルをコンパイル後、HandyGraphicを起動させた状態で、実行ファイル(`build/app`)を実行します<br>
 
 # サンプルのコンパイル方法
 Makefileを導入した状態で`make`を実行します<br>
-実行ファイルは`build/app`です<br>
-なお、スマホ接続時のJson解析に<a href="https://rapidjson.org/" target="_blank" rel="noopener noreferrer">RapidJson</a>を使用しているので導入が必要です
+なお、スマホ接続時のJson解析に<a href="https://rapidjson.org/" target="_blank" rel="noopener noreferrer">RapidJson</a>を使用しているので、その導入が必要です
 
 # 操作方法
 基本の操作<br>
