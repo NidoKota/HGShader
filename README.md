@@ -45,12 +45,13 @@ Makefileを導入した状態で`make`を実行します<br>
 - q キー : HandyGraphicを終了する<br>
 
 # スマホを接続する
+
+https://user-images.githubusercontent.com/36328961/142802126-4341ac6e-0e66-4996-9616-4cb359e3e5e6.mp4
+
 <a href="https://zig-project.com/" target="_blank" rel="noopener noreferrer">ZIGSIM</a>(無料版でも可)を使用し、スマホと接続することができます<br>
 接続すると、センサー情報を使用してシェーダーを動かすことができるようになります<br>
 サンプルでは`PhoneShader`のみ対応しています<br>
 このシェーダーではスマホの回転情報を受け取り、オブジェクトを回転させます<br>
-
-https://user-images.githubusercontent.com/36328961/142802126-4341ac6e-0e66-4996-9616-4cb359e3e5e6.mp4
 
 # 表示される情報
 <img width="270" alt="" src="manualimages/3.png"><br>
