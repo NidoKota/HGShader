@@ -34,3 +34,5 @@
 # Visual Studio cache directory
 .vs/
 .vscode/
+
+/build

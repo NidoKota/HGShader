@@ -1,9 +1,6 @@
-#include <iostream>
-#include <math.h>
-#include <map>
-#include "../Library/Defines.hpp"
-#include "../Library/ShaderUtility.hpp"
-#include "../Library/Event.hpp"
+#pragma once
+
+#include "../include/SrcInclude.hpp"
 
 //簡単にキー入力を取得できるようにする
 struct InputManager : public EventHandler

@@ -1,12 +1,8 @@
 #pragma once
 
-#include <iostream>
-#include <string>
-#include <stdio.h>
-#include <vector>
-#include "Defines.hpp"
+#include "../../include/BaseInclude.hpp"
 
-//複数のstd::function<void(void)を保有するだけ
+//複数のstd::function<void(void)>を保有するだけ
 struct Delegate
 {
     public :

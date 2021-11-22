@@ -1,13 +1,13 @@
 #include "ShaderFuncs.hpp"
 
 //虹色のゆらめく円のシェーダー
-vec3 RainbowCircleShader(vec3 uv, float t)
+vec3 RainbowCircleShader(vec3 uv, float t, std::vector<zigsimdata>* zsds)
 {
     vec3 result;
 
-    result = rainbow(uv.x * uv.y / 3.f + t / 10.f);
+    result = rainbow(uv.x * uv.y / 3.f + t / 2.f);
     
-    float radius = gradationNoise(uv * 1.5f + t / 6.f) * 0.5f + 0.5f;
+    float radius = gradationNoise(uv * 1.5f + t) * 0.5f + 0.5f;
 
     vec3 centerUV = (uv - 0.5f) * 2.f;
     centerUV.z = 0;
@@ -26,17 +26,16 @@ vec3 RainbowCircleShader(vec3 uv, float t)
 }
 
 //ハートシェーダー
-vec3 HeartShader(vec3 uv, float t)
+vec3 HeartShader(vec3 uv, float t, std::vector<zigsimdata>* zsds)
 {
     uv = (uv - 0.5f) * 2.f;
 
     uv += vec3(0.f, 0.3f);
     uv *= vec3(0.9f, 1.2f);
     
-    float width = 0.01f;
     float radius = 0.3f;
     float fade = 0.05f;
-    float length = pow(uv.x, 2.f) + pow(uv.y - sqrt(abs(uv.x)), 2.f) - t * 0.15f;
+    float length = pow(uv.x, 2.f) + pow(uv.y - sqrt(abs(uv.x)), 2.f) - t * 0.75f;
     float heart = smoothstep(radius + fade, radius, abs(sin(length) * 1.5f));
     
     length *= 2.f;
@@ -53,12 +52,12 @@ vec3 HeartShader(vec3 uv, float t)
 }
 
 //波シェーダー
-vec3 WaveShader(vec3 uv, float t)
+vec3 WaveShader(vec3 uv, float t, std::vector<zigsimdata>* zsds)
 {
     float colorHeight = 2;
 
-    float wave0 = (sin((0.2f * t + uv).x * 8.f + t / 10.f) + 0.5f) / 2.f;
-    float wave1 = (sin((-0.15f * t + uv).x * -3.f + t / -20.f) + 0.5f) / 2.f;
+    float wave0 = (sin((t + uv).x * 8.f + t / 2.f) + 0.5f) / 2.f;
+    float wave1 = (sin((-0.75f * t + uv).x * -3.f + t / -10.f) + 0.5f) / 2.f;
 
     float sumWave = ((wave0 + wave1) / 6.f + uv).y;
     float resultWave = smoothstep(sumWave, sumWave + 0.03f, 0.55f);
@@ -105,9 +104,9 @@ float getShapeRatio(float fade, float t)
 }
 
 //形を変えながら回転するシェーダー
-vec3 RotationShapesShader(vec3 uv, float t)
+vec3 RotationShapesShader(vec3 uv, float t, std::vector<zigsimdata>* zsds)
 {
-    uv = rotate(uv, smoothstep(0.f, 1.f, fract(t / 15.f)) * 2.5f * M_PI);
+    uv = rotate(uv, smoothstep(0.f, 1.f, fract(t / 3.f)) * 2.5f * M_PI);
     uv -= 0.5f;
     uv *= 2.f;
     
@@ -116,7 +115,7 @@ vec3 RotationShapesShader(vec3 uv, float t)
     float cir = circle(uv, 1.f);
     float pol = polygon(uv, 3, 0.9f);
 
-    t /= 30.f;
+    t /= 6.f;
     float fade = 1.f / 4.f;
     return smoothstep(-0.475f, -0.5f, squ * getShapeRatio(fade, t + fade * 0.f) + 
                                       str * getShapeRatio(fade, t + fade * 1.f) + 
@@ -125,9 +124,9 @@ vec3 RotationShapesShader(vec3 uv, float t)
 }
 
 //ローディングっぽいシェーダー
-vec3 LoadingShader(vec3 uv, float t)
+vec3 LoadingShader(vec3 uv, float t, std::vector<zigsimdata>* zsds)
 {
-    t *= -1.f;
+    t *= -5.f;
 
     float rotateSpeeed = 0.16f;
     float addRotateSpeeed = 0.11f;
@@ -191,7 +190,7 @@ vec3 getSphereNormal(vec3 p)
 }
 
 //宇宙っぽいシェーダー
-vec3 SpaceShader(vec3 uv, float t)
+vec3 SpaceShader(vec3 uv, float t, std::vector<zigsimdata>* zsds)
 {
     uv = (uv -0.5f) * 2.f;
 
@@ -200,9 +199,9 @@ vec3 SpaceShader(vec3 uv, float t)
 
     vec3 color;
     
-    vec3 comPos = vec3(0.f, 0.f, -t / 5.f);
-    vec3 comForword = vecRotateZ(vecRotateY(vecRotateX(vec3(0.f, 0.f, 1.f), sin(t / 70.f)), cos(t / 70.f)), -sin(t / 70.f));
-    vec3 comUp = vecRotateZ(vecRotateY(vecRotateX(vec3(0.f, 1.f, 0.f), sin(t / 70.f)), cos(t / 70.f)), -sin(t / 70.f));
+    vec3 comPos = vec3(0.f, 0.f, -t);
+    vec3 comForword = vecRotateZ(vecRotateY(vecRotateX(vec3(0.f, 0.f, 1.f), sin(t / 14.f)), cos(t / 14.f)), -sin(t / 14.f));
+    vec3 comUp = vecRotateZ(vecRotateY(vecRotateX(vec3(0.f, 1.f, 0.f), sin(t / 14.f)), cos(t / 14.f)), -sin(t / 14.f));
     vec3 comRight = cross(comForword, comUp);
     
     vec3 ray = normalize(comForword + comRight * uv.x * fov + comUp * uv.y * fov);
@@ -220,7 +219,7 @@ vec3 SpaceShader(vec3 uv, float t)
     float sw = 1.f - step(0.001f, abs(distance));
     float fade = 0.01f;
     float dps = rLength / 40.f;
-    float a = fract(t / 50.f) * (fade + 1.f) + fade;
+    float a = fract(t / 10.f) * (fade + 1.f) + fade;
     color = clamp(dot(lightDir, getSphereNormal(rPos)), 0.f, 1.f) * 0.3f + 0.3f + (step(a - fade, dps) - step(a + fade, dps)) * 0.3f; 
     color *= sw;
 
@@ -256,8 +255,9 @@ vec3 getBlockNormal(vec3 p)
 }
 
 //ブロックが回転するシェーダー
-vec3 BlockShader(vec3 uv, float t)
+vec3 BlockShader(vec3 uv, float t, std::vector<zigsimdata>* zsds)
 {
+    t *= 5.f;
     uv = (uv -0.5f) * 2.f;
 
     float fov = tan(radians(60.f / 2.f));
@@ -288,4 +288,62 @@ vec3 BlockShader(vec3 uv, float t)
     color *= sw;
 
     return floor(color * 30.f) / 30.f;
+}
+
+float longBoxFunc(vec3 p, vec4 qu)
+{
+    vec3 q = abs(quatXvec3(qu, p));
+    return length(max(q - vec3(0.4f, 0.8f, 0.1f), 0.f)) - 0.05f;
+}
+
+vec3 getLongBoxNormal(vec3 p, vec4 qu)
+{
+    float d = 0.0001f;
+    return normalize(vec3(longBoxFunc(p + vec3(d, 0.f, 0.f), qu) - longBoxFunc(p + vec3(-d, 0.f, 0.f), qu),
+                          longBoxFunc(p + vec3(0.f, d, 0.f), qu) - longBoxFunc(p + vec3(0.f, -d, 0.f), qu),
+                          longBoxFunc(p + vec3(0.f, 0.f, d), qu) - longBoxFunc(p + vec3(0.f, 0.f, -d), qu)));
+}
+
+vec4 x90rot = angleAxis2Quat(M_PI / 2.f, vec3(1, 0, 0));
+
+//スマホでZigSimを使って回転させるシェーダー
+vec3 PhoneShader(vec3 uv, float t, std::vector<zigsimdata>* zsds)
+{
+    uv = (uv -0.5f) * 2.f;
+
+    float fov = tan(radians(60.f / 2.f));
+
+    vec3 color;
+    
+    vec3 comPos;
+
+    comPos = vec3(0, 0, 2.25f);
+
+    vec3 comForword = normalize(vec3(0) - comPos);
+    vec3 comUp = quatXvec3(x90rot, comForword);
+    vec3 comRight = normalize(cross(comForword, comUp));
+    
+    vec3 lightDir = -comForword;
+
+    vec3 ray = normalize(comForword + comRight * uv.x * fov + comUp * uv.y * fov);
+    
+    float distance = 0.f;
+    float rLength = 0.f;
+    vec3 rPos = comPos;
+    vec4 qu;
+    if(zsds->size() > 0) qu = quatXquat(quatInverse(zsds->operator[](0)._sensorData.quaternion), x90rot);
+    else qu = angleAxis2Quat(M_PI * t / 5.f, vec3(1, 0, 0));
+
+    for(int i = 0; i < 25; i++)
+    {
+        distance = longBoxFunc(rPos, qu);
+        rLength += distance;
+        rPos = comPos + ray * rLength;
+    }
+
+    float sw = 1.f - step(0.001f, abs(distance));
+    color = clamp(dot(lightDir, getLongBoxNormal(rPos, qu)), 0.f, 1.f) * 0.4f + 0.1f;
+    color *= sw;
+
+    return floor(color * 20.f) / 20.f;
 }

@@ -1,8 +1,6 @@
-#include <iostream>
-#include <math.h>
-#include <time.h>
-#include "../Library/Defines.hpp"
-#include "../Library/Event.hpp"
+#pragma once
+
+#include "../include/SrcInclude.hpp"
 
 //FPS数を計る
 struct FPSCounter : public EventHandler

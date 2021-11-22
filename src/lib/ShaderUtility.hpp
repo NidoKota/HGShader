@@ -1,9 +1,57 @@
 #pragma once
 
-#include <iostream>
-#include <math.h>
-#include <time.h>
-#include "Defines.hpp"
+#include "../../include/BaseInclude.hpp"
+
+struct vec4;
+struct vec3;
+
+struct vec4
+{
+    public:
+    float x;
+    float y;
+    float z;
+    float w;
+
+    vec4();
+    vec4(const float f);
+    vec4(const float x, const float y);
+    vec4(const float x, const float y, const float z);
+    vec4(const float x, const float y, const float z, const float w);
+    vec4(const vec3 v, const float w);
+    vec3 xyz();
+    vec4 SetAll(const float f);
+    vec4 SetAll(const float x, const float y);
+    vec4 SetAll(const float x, const float y, const float z);
+    vec4 SetAll(const float x, const float y, const float z, const float w);
+    vec4 SetAll(const vec3 v, const float w);
+    hgcolor ToHGColor();
+};
+
+vec4 operator + (const vec4  l, const vec4  r);
+vec4 operator + (const float l, const vec4  r);
+vec4 operator + (const vec4  l, const float r);
+vec4 operator - (const vec4  l, const vec4  r);
+vec4 operator - (const float l, const vec4  r);
+vec4 operator - (const vec4  l, const float r);
+vec4 operator * (const vec4  l, const vec4  r);
+vec4 operator * (const float l, const vec4  r);
+vec4 operator * (const vec4  l, const float r);
+vec4 operator / (const vec4  l, const vec4  r);
+vec4 operator / (const float l, const vec4  r);
+vec4 operator / (const vec4  l, const float r);
+vec4 operator - (const vec4  l);
+void operator += (vec4 &l, const vec4  r);
+void operator += (vec4 &l, const float r);
+void operator -= (vec4 &l, const vec4  r);
+void operator -= (vec4 &l, const float r);
+void operator *= (vec4 &l, const vec4  r);
+void operator *= (vec4 &l, const float r);
+void operator /= (vec4 &l, const vec4  r);
+void operator /= (vec4 &l, const float r);
+int operator == (const vec4 l, const vec4 r);
+int operator != (const vec4 l, const vec4 r);
+std::ostream& operator << (std::ostream& l, const vec4& r);
 
 struct vec3
 {
@@ -11,6 +59,7 @@ struct vec3
     float x;
     float y;
     float z;
+    float w;
 
     vec3();
     vec3(const float f);
@@ -50,61 +99,97 @@ std::ostream& operator << (std::ostream& l, const vec3& r);
 template <typename T> T radians(const T d);
 template <typename T> T degrees(const T r);
 vec3 abs(const vec3 x);
-vec3 sign(const vec3 x);
+vec4 abs(const vec4 x);
 float sign(const float x);
+vec3 sign(const vec3 x);
+vec4 sign(const vec4 x);
 vec3 floor(const vec3 x);
+vec4 floor(const vec4 x);
 vec3 ceil(const vec3 x);
+vec4 ceil(const vec4 x);
 template <typename T> T fract(const T x);
 template <typename T> T mod(const T x, const T y);
 float min(const float x, const float y);
 vec3 min(const vec3 x, const vec3 y);
+vec4 min(const vec4 x, const vec4 y);
 float max(const float x, const float y);
 vec3 max(const vec3 x, const vec3 y);
+vec4 max(const vec4 x, const vec4 y);
 template <typename T> T clamp(const T x, const T a, const T b);
 template <typename T> T mix(const T x, const T y, const T a);
 float step(const float a, const float x);
 vec3 step(const vec3 a, const vec3 x);
+vec4 step(const vec4 a, const vec4 x);
 template <typename T> T smoothstep(const T a, const T b, const T t);
 vec3 sin(const vec3 x);
+vec4 sin(const vec4 x);
 vec3 cos(const vec3 x);
+vec4 cos(const vec4 x);
 vec3 tan(const vec3 x);
+vec4 tan(const vec4 x);
 vec3 asin(const vec3 x);
+vec4 asin(const vec4 x);
 vec3 acos(const vec3 x);
+vec4 acos(const vec4 x);
 vec3 atan2(const vec3 y, const vec3 x);
+vec4 atan2(const vec4 y, const vec4 x);
 vec3 pow(const vec3 x, const vec3 y);
+vec4 pow(const vec4 x, const vec4 y);
 vec3 exp(const vec3 x);
+vec4 exp(const vec4 x);
 vec3 log(const vec3 x);
+vec4 log(const vec4 x);
 vec3 exp2(const vec3 x);
+vec4 exp2(const vec4 x);
 vec3 log2(const vec3 x);
+vec4 log2(const vec4 x);
 vec3 sqrt(const vec3 x);
+vec4 sqrt(const vec4 x);
 vec3 inverssqrt(const vec3 x);
-float length(const vec3 x);
-float distance(const vec3 x, const vec3 y);
-vec3 normalize(const vec3 x);
+vec4 inverssqrt(const vec4 x);
+template <typename T> float length(const T x);
+template <typename T> float distance(const T x, const T y);
+template <typename T> T normalize(const T x);
 float dot(const vec3 x, const vec3 y);
+float dot(const vec4 x, const vec4 y);
 vec3 cross(const vec3 v1, const vec3 v2);
 vec3 faceforward(const vec3 N, const vec3 I, const vec3 R);
 vec3 reflect(const vec3 I, const vec3 N);
 vec3 refract(const vec3 I, const vec3 N, const float eta);
-vec3 lessThan(const vec3 x, const vec3 y);
+vec4 lessThan(const vec4 x, const vec4 y);
 vec3 lessThanEqual(const vec3 x, const vec3 y);
+vec4 lessThanEqual(const vec4 x, const vec4 y);
 vec3 greaterThan(const vec3 x, const vec3 y);
+vec4 greaterThan(const vec4 x, const vec4 y);
 vec3 greaterThanEqual(const vec3 x, const vec3 y);
+vec4 greaterThanEqual(const vec4 x, const vec4 y);
 vec3 equal(const vec3 x, const vec3 y);
+vec4 equal(const vec4 x, const vec4 y);
 vec3 notEqual(const vec3 x, const vec3 y);
+vec4 notEqual(const vec4 x, const vec4 y);
 float any(const vec3 x);
+float any(const vec4 x);
 float all(const vec3 x);
+float all(const vec4 x);
 vec3 _not(const vec3 x);
-vec3 hgcolorToRGB(const hgcolor hgc);
-vec3 random2(const vec3 uv);
-float gradationNoise(const vec3 uv);
-vec3 mul3x333(const vec3 x, const vec3 y[3]);
+vec4 _not(const vec4 x);
+vec3 hgcolorToRGBA(const hgcolor hgc);
+vec3 random2(const vec3 x);
+float gradationNoise(const vec3 x);
+void quat2mul333(vec4 v333[3], const vec4 q);
+vec4 quatXquat(const vec4 l, const vec4 r);
+vec3 quatXvec3(const vec4 l, const vec3 r);
+vec4 quatInverse(const vec4 q);
+vec4 angleAxis2Quat(const float angle, const vec3 axis);
+vec3 mul3x333(const vec3 l, const vec3 r[3]);
+vec4 mul4x4444(const vec4 x, const vec4 y[4]);
 vec3 rotate(const vec3 uv, const float angle);
 vec3 vecRotateX(const vec3 vec, const float angle);
 vec3 vecRotateY(const vec3 vec, const float angle);
 vec3 vecRotateZ(const vec3 vec, const float angle);
 float gauss(const float a, const float x);
 float lengthsqr(const vec3 x);
+float lengthsqr(const vec4 x);
 float roundN(const float num, const int n);
 template <typename T> T remap(const T v, const T inMin, const T inMax, const T outMin, const T outMax);
 vec3 screenSynthesis(const vec3 def, const vec3 syn);

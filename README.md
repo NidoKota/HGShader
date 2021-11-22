@@ -7,7 +7,7 @@ https://github.com/NidoKota/HGShader/blob/main/README.md
 
 # HGShader
 
-<img width="275" alt="" src="ManualImages/0.gif"> <img width="275" alt="" src="ManualImages/1.gif"> <img width="275" alt="" src="ManualImages/2.gif">
+<img width="275" alt="" src="manualimages/0.gif"> <img width="275" alt="" src="manualimages/1.gif"> <img width="275" alt="" src="manualimages/2.gif">
 <br>
 
 <a href="http://www7a.biglobe.ne.jp/~ogihara/Hg/hg-jpn.html" target="_blank" rel="noopener noreferrer">HandyGraphic</a> で本格的なシェーディングがしたい…！<br>
@@ -27,11 +27,9 @@ https://user-images.githubusercontent.com/36328961/125702413-61206a6e-7483-4179-
 HandyGraphicを起動させた状態で、Sampleをダブルクリックします
 
 # サンプルのコンパイル方法
-Sourceフォルダ内で以下のコードを実行します<br>
-`g++ Main.cpp ShaderFuncs.cpp EventHandlers/ShaderDisplayer.cpp EventHandlers/InputManager.cpp EventHandlers/FPSCounter.cpp EventHandlers/DoubleLayerDisplayer.cpp Library/ShaderUtility.cpp Library/Event.cpp -o Sample -lhg -std=c++11 -pthread`<br>
-<br>
-または、Makefileを導入した状態で`make compileRun`を実行します<br>
-この場合、コンパイル後にHandyGraphicとサンプルが自動的に起動します
+Makefileを導入した状態で`make`を実行します<br>
+実行ファイルは`build/app`です<br>
+なお、スマホ接続時のJson解析に<a href="https://rapidjson.org/" target="_blank" rel="noopener noreferrer">RapidJson</a>を使用しているので導入が必要です
 
 # 操作方法
 基本の操作<br>
@@ -46,8 +44,14 @@ Sourceフォルダ内で以下のコードを実行します<br>
 - f キー : FPS数制限を設定/解除する<br>
 - q キー : HandyGraphicを終了する<br>
 
+# スマホを接続する
+<a href="https://zig-project.com/" target="_blank" rel="noopener noreferrer">ZIGSIM</a>(無料版でも可)を使用し、スマホと接続することができます<br>
+接続すると、センサー情報を使用してシェーダーを動かすことができるようになります<br>
+サンプルでは`PhoneShader`のみ対応しています<br>
+このシェーダーではスマホの回転情報を受け取り、オブジェクトを回転させます<br>
+
 # 表示される情報
-<img width="275" alt="" src="ManualImages/3.png"><br>
+<img width="275" alt="" src="manualimages/3.png"><br>
 - FPS : FPS数<br>
 - FPSLimit : FPS数制限を設定しているかどうか<br>
 - Time : 起動してからの経過時間<br>
@@ -80,11 +84,6 @@ Sourceフォルダ内で以下のコードを実行します<br>
 ## 低解像度でも楽しめるシェーダーにする
 低解像度であれば、ほとんどのシェーダーは安定して動作します<br>
 様々な環境で動作させるために、低解像度でも楽しめるシェーダーを書くことが重要です
-
-## vec3のみで頑張る
-vec2やmat3、mat3x4等はありません<br>
-vec3で代用したりvec3の配列で実装してください<br>
-~~vec4はダメかも~~<br>
 
 ## 数字の後に f を付ける
 C++では小数点を含む数字はdoubleに解釈されるのでtemplate関数でエラーが発生します<br>

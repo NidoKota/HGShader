@@ -1,17 +1,11 @@
-#include <iostream>
-#include <math.h>
-#include <vector>
-#include <thread>
-#include <future>
-#include <chrono>
-#include "../Library/Defines.hpp"
-#include "../Library/ShaderUtility.hpp"
-#include "../Library/Event.hpp"
+#pragma once
+
+#include "../include/SrcInclude.hpp"
 
 //シェーダーを表示する
 struct ShaderDisplayer : public EventHandler
 {
-    using Func = vec3 (*)(vec3, float);
+    using Func = vec3 (*)(vec3, float, std::vector<zigsimdata>*);
     
 private :
     std::vector<Func> shaderFuncs;
@@ -20,18 +14,19 @@ private :
     vec3 uv;
     std::future<void> pixUpdateFuture;
     std::future<void> pixRenderFuture;
+    std::vector<zigsimdata>* zsds;
     double* t;
     double pixSize;
     double shaderTime;
     double shaderTimeFitter;
-    double pixUpdateDeltaTime;
-    double pixRenderDeltaTime;
+    double calcColorsDeltaTime;
+    double renderColorsDeltaTime;
     float shaderSpeed;
     int hiddenLayerID;
     int shaderFuncsSize;
     int pixCount;
     int shaderFuncsIndex;
-    int updateColorsIndex;
+    int calcColorsIndex;
     int renderColorsIndex;
     int bufferColorsIndex;
     int renderCount;
@@ -57,15 +52,19 @@ public :
     //経過時間が入った変数のポインタと、シェーダー関数のポインタを登録
     //シェーダー関数に対して、UV座標と経過時間を渡し、ピクセルの色を受けとる
     template<typename First, typename... Rest>
-    ShaderDisplayer(double* t, const First& first, const Rest&... rest)
+    ShaderDisplayer(double* t, std::vector<zigsimdata>* zsds, const First& first, const Rest&... rest)
     {
         this->t = t;
+        this->zsds = zsds;
         RoundUp(first, rest...);
 
-        shaderSpeed = 5;
+        shaderSpeed = 1;
         shaderFuncsSize = shaderFuncs.size();
+
+        calcColorsIndex = 0;
         renderColorsIndex = -1;
         bufferColorsIndex = -2;
+
         renderCount = 1;
         SetPixCount(FindDivisibleNum(WINDOW_SIZE, 50, -1));
     }
@@ -89,7 +88,7 @@ public :
     //シェーダーを切り替える
     void SetShaderFuncsIndex(int index);
     //Shaderの計算にかかった時間を取得
-    double GetPixUpdateDeltaTime();
+    double GetCalcColorsDeltaTime();
     //ピクセルのレンダリング時間を取得
-    double GetPixRenderDeltaTime();
+    double GetRenderColorsDeltaTime();
 };

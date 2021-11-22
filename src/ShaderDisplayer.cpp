@@ -28,7 +28,7 @@ void ShaderDisplayer::FlameUpdate()
         {
             for (int y = 0; y < GetPixCount(); y++) PixUpdate(x, y);
         }
-        pixUpdateDeltaTime = clamp(duration_cast<milliseconds>(system_clock::now() - sT).count() / 1000.f, 0.f, 1.f);
+        calcColorsDeltaTime = clamp(duration_cast<milliseconds>(system_clock::now() - sT).count() / 1000.f, 0.f, 1.f);
     });
 
     if(renderCount >= 2)
@@ -41,7 +41,7 @@ void ShaderDisplayer::FlameUpdate()
             {
                 for (int y = 0; y < GetPixCount(); y++) PixRender(x, y);
             }
-            pixRenderDeltaTime = clamp(duration_cast<milliseconds>(system_clock::now() - sT).count() / 1000.f, 0.f, 1.f);
+            renderColorsDeltaTime = clamp(duration_cast<milliseconds>(system_clock::now() - sT).count() / 1000.f, 0.f, 1.f);
         });
 
         pixRenderFuture.wait();
@@ -50,7 +50,7 @@ void ShaderDisplayer::FlameUpdate()
     pixUpdateFuture.wait();
     
     renderCount = renderCount >= 3 ? renderCount : renderCount + 1;
-    updateColorsIndex = updateColorsIndex >= 2 ? 0 : updateColorsIndex + 1;
+    calcColorsIndex = calcColorsIndex >= 2 ? 0 : calcColorsIndex + 1;
     renderColorsIndex = renderColorsIndex >= 2 ? 0 : renderColorsIndex + 1;
     bufferColorsIndex = bufferColorsIndex >= 2 ? 0 : bufferColorsIndex + 1;
 }
@@ -59,9 +59,7 @@ void ShaderDisplayer::PixUpdate(int x, int y)
 {
     //UV座標の計算
     uv.SetAll((double)x / GetPixCount(), (double)y / GetPixCount());
-    //Shaderの計算をする 設定によっては色数を減らす
-    if(COLOR_COUNT >= 256) colors[updateColorsIndex][x][y] = shaderFuncs[shaderFuncsIndex](uv, shaderTime);
-    else colors[updateColorsIndex][x][y] = floor(shaderFuncs[shaderFuncsIndex](uv, shaderTime) * (float)COLOR_COUNT) / (float)COLOR_COUNT;
+    colors[calcColorsIndex][x][y] = shaderFuncs[shaderFuncsIndex](uv, shaderTime, zsds);
 }
 
 void ShaderDisplayer::PixRender(int x, int y)
@@ -170,12 +168,12 @@ void ShaderDisplayer::SetShaderFuncsIndex(int index)
     }
 }
 
-double ShaderDisplayer::GetPixUpdateDeltaTime()
+double ShaderDisplayer::GetCalcColorsDeltaTime()
 {
-    return pixUpdateDeltaTime;
+    return calcColorsDeltaTime;
 }
 
-double ShaderDisplayer::GetPixRenderDeltaTime()
+double ShaderDisplayer::GetRenderColorsDeltaTime()
 {
-    return pixRenderDeltaTime;
+    return renderColorsDeltaTime;
 }

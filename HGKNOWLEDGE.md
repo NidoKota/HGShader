@@ -30,11 +30,11 @@ extern "C" {
 HandyGraphicで一番処理を食われるのは描画です<br>
 HGShaderではなるべく描画をしないよう工夫しました<br>
 <br>
-<img width="275" alt="" src="ManualImages/4.png"><br>
+<img width="275" alt="" src="manualimages/4.png"><br>
 前回の描画を利用する機能を消した状態<br>
 UpdatePixが2500個(全部)で、3.3FPSとガクガクの状態になってます<br>&nbsp;<br>
 
-<img width="275" alt="" src="ManualImages/5.png"><br>
+<img width="275" alt="" src="manualimages/5.png"><br>
 デフォルトの状態<br>
 同じ解像度で同じシェーダーなのにUpdatePixが300個程度になっています<br>
 FPS数も31.0と大幅に向上しています<br>
@@ -59,10 +59,10 @@ FPS数も31.0と大幅に向上しています<br>
 この`COLOR_CONT`を減らすと、描画する色数が制限されます<br>
 つまり、ピクセルを描画する際、前フレームと同じ色になる可能性が上がり、ピクセル(`HgBox`)の描画回数が減るというわけです
 
-<img width="275" alt="" src="ManualImages/6.png"><br>
+<img width="275" alt="" src="manualimages/6.png"><br>
 通常ではUpdatePixが吹っ切れて、FPS数は4.5となっています<br>
 <br>
-<img width="275" alt="" src="ManualImages/7.png"><br>
+<img width="275" alt="" src="manualimages/7.png"><br>
 10色に制限するとUpdatePixが大幅に減り、FPS数が10.1に上がっています<br>
 <br>
 ただし、以下の代償があるので使用には注意が必要です<br>
@@ -76,7 +76,7 @@ FPS数も31.0と大幅に向上しています<br>
 恐らくHandyGraphicの関数を複数スレッドで同時に使う事はできません(実行するとフリーズします)<br>
 ですから今回は、シェーダーの計算のみスレッドを分けました<br>
 
-<img width="475" alt="" src="ManualImages/8.png"><br>
+<img width="475" alt="" src="manualimages/8.png"><br>
 
 上の図を見てください<br>
 `ShaderDisplayer`では、全ての色を保管した3つの配列を持っています<br>
