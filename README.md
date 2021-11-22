@@ -7,7 +7,7 @@ https://github.com/NidoKota/HGShader/blob/main/README.md
 
 # HGShader
 
-<img width="275" alt="" src="manualimages/0.gif"> <img width="275" alt="" src="manualimages/1.gif"> <img width="275" alt="" src="manualimages/2.gif">
+<img width="270" alt="" src="manualimages/0.gif"> <img width="270" alt="" src="manualimages/1.gif"> <img width="270" alt="" src="manualimages/2.gif">
 <br>
 
 <a href="http://www7a.biglobe.ne.jp/~ogihara/Hg/hg-jpn.html" target="_blank" rel="noopener noreferrer">HandyGraphic</a> で本格的なシェーディングがしたい…！<br>
@@ -50,8 +50,10 @@ Makefileを導入した状態で`make`を実行します<br>
 サンプルでは`PhoneShader`のみ対応しています<br>
 このシェーダーではスマホの回転情報を受け取り、オブジェクトを回転させます<br>
 
+https://user-images.githubusercontent.com/36328961/142802126-4341ac6e-0e66-4996-9616-4cb359e3e5e6.mp4
+
 # 表示される情報
-<img width="275" alt="" src="manualimages/3.png"><br>
+<img width="270" alt="" src="manualimages/3.png"><br>
 - FPS : FPS数<br>
 - FPSLimit : FPS数制限を設定しているかどうか<br>
 - Time : 起動してからの経過時間<br>
