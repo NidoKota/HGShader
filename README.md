@@ -7,7 +7,7 @@ https://github.com/NidoKota/HGShader/blob/main/README.md
 
 # HGShader
 
-<img width="270" alt="" src="manualimages/0.gif"> <img width="270" alt="" src="manualimages/1.gif"> <img width="270" alt="" src="manualimages/2.gif">
+<img width="270" alt="" src="ManualImages/0.gif"> <img width="270" alt="" src="ManualImages/1.gif"> <img width="270" alt="" src="ManualImages/2.gif">
 <br>
 
 <a href="http://www7a.biglobe.ne.jp/~ogihara/Hg/hg-jpn.html" target="_blank" rel="noopener noreferrer">HandyGraphic</a> で本格的なシェーディングがしたい…！<br>
@@ -52,7 +52,7 @@ https://user-images.githubusercontent.com/36328961/142802126-4341ac6e-0e66-4996-
 このシェーダーではスマホの回転情報を受け取り、オブジェクトを回転させます<br>
 
 # 表示される情報
-<img width="270" alt="" src="manualimages/3.png"><br>
+<img width="270" alt="" src="ManualImages/3.png"><br>
 - FPS : FPS数<br>
 - FPSLimit : FPS数制限を設定しているかどうか<br>
 - Time : 起動してからの経過時間<br>
