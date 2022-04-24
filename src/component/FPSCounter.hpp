@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../include/ComponentInclude.hpp"
+#include "../../include/SubInclude.hpp"
 
 //FPS数を計る
 struct FPSCounter : public EventHandler

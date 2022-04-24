@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../../include/SubInclude.hpp"
-
 struct device
 {
 public:
