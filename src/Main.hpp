@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../include/SrcInclude.hpp"
+#include "../include/BaseInclude.hpp"
 
-void MainFlameUpdate();
-void OnMessage(int id, int index, char* buf);
-void OnChangeConnect();
-void InfoDisplay(int layerId);
+#include "MainComponent.hpp"
+
+void Start();
+void FlameUpdate();

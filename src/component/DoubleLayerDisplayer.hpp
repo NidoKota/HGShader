@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../include/SrcInclude.hpp"
+#include "../include/ComponentInclude.hpp"
 
 //ダブルレイヤーを用いた描画を行う
 struct DoubleLayerDisplayer : public EventHandler

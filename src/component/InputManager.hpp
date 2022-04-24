@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../include/SrcInclude.hpp"
+#include "../include/ComponentInclude.hpp"
 
 //簡単にキー入力を取得できるようにする
 struct InputManager : public EventHandler

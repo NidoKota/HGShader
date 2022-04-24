@@ -36,13 +36,13 @@ void TCPManager::Connect()
     if (sock0 < 0)
     {
         perror("socket");
-        exit(1);
+        exit(EXIT_FAILURE);
     }
  
     if (bind(sock0, (sockaddr *)&addr, sizeof(addr)) < 0)
     {
         perror("bind");
-        exit(1);
+        exit(EXIT_FAILURE);
     }
  
     int currentId = 0;
@@ -51,7 +51,7 @@ void TCPManager::Connect()
         if (listen(sock0, 5) < 0)
         {
             perror("listen");
-            exit(1);
+            exit(EXIT_FAILURE);
         }
 
         len = sizeof(client);
@@ -59,7 +59,7 @@ void TCPManager::Connect()
         if (sock < 0)
         {
             perror("accept");
-            exit(1);
+            exit(EXIT_FAILURE);
         }
 
         //mapに追加後にコピーされるのでポインタはmapから取得する
