@@ -1,13 +1,14 @@
+#再帰的にディレクトリ内のファイルを探してコンパイルする
+
 PROGNAME := app
 INCDIR := include
 SRCDIR := src
-LIBDIR := lib
 LIBS := -lhg
 OUTDIR := build
 TARGET := $(OUTDIR)/$(PROGNAME)
-SRCS := $(wildcard $(SRCDIR)/*.cpp) $(wildcard $(SRCDIR)/$(LIBDIR)/*.cpp)
+SRCDIRS := $(shell find $(SRCDIR) -type d)
+SRCS := $(foreach var, $(SRCDIRS), $(wildcard $(var)/*.cpp))
 OBJS := $(addprefix $(OUTDIR)/,$(patsubst %.cpp,%.o,$(SRCS)))
-#$(warning $(OBJS))
 
 CC = g++
 CFLAGS = -Wall -std=c++11 -pthread -I $(INCDIR)
