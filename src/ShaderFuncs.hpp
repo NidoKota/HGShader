@@ -10,3 +10,4 @@ vec3 LoadingShader(vec3 uv, float t, std::vector<zigsimdata>* zsds);
 vec3 SpaceShader(vec3 uv, float t, std::vector<zigsimdata>* zsds);
 vec3 BlockShader(vec3 uv, float t, std::vector<zigsimdata>* zsds);
 vec3 PhoneShader(vec3 uv, float t, std::vector<zigsimdata>* zsds);
+vec3 Race(vec3 uv, float t, std::vector<zigsimdata>* zsds);

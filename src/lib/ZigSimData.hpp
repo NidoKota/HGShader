@@ -16,6 +16,8 @@ struct sensordata
 {
 public:
     vec4 quaternion;
+    float compass;
+    vec3 touch;
 };
 
 //ZigSimから受け取ったデータ(一部のみ実装)

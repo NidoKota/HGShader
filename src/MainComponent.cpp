@@ -43,7 +43,7 @@ InputManager* GetInputManagerPtr(Delegate* flameUpdateDelegatePtr)
 
 ShaderDisplayer* GetShaderDisplayerPtr(Delegate* flameUpdateDelegatePtr)
 {
-    ShaderDisplayer* result = new ShaderDisplayer(&totalTime, &zsds, RainbowCircleShader, HeartShader, WaveShader, RotationShapesShader, LoadingShader, SpaceShader, BlockShader, PhoneShader);
+    ShaderDisplayer* result = new ShaderDisplayer(&totalTime, &zsds, RainbowCircleShader, HeartShader, WaveShader, RotationShapesShader, LoadingShader, SpaceShader, BlockShader, PhoneShader, Race);
     result->Subscribe(*flameUpdateDelegatePtr);
     return result;
 }

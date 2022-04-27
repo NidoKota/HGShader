@@ -27,4 +27,18 @@ void zigsimdata::Parse(char* data)
         Value& qua = sensor["quaternion"];
         _sensorData.quaternion = vec4((float)qua["x"].GetDouble(), (float)qua["y"].GetDouble(), (float)qua["z"].GetDouble(), (float)qua["w"].GetDouble());
     }
+    if(sensor.HasMember("compass"))
+    {
+        Value& com = sensor["compass"];
+        _sensorData.compass = (float)com["compass"].GetDouble();
+    }
+    if(sensor.HasMember("touch"))
+    {
+        Value& tou = sensor["touch"];
+        if (tou.Size() > 0)
+        {
+            Value& touZero = tou[0];
+            _sensorData.touch = vec3((float)touZero["x"].GetDouble(), (float)touZero["y"].GetDouble(), 0);
+        }
+    }
 }

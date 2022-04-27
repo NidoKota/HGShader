@@ -347,3 +347,106 @@ vec3 PhoneShader(vec3 uv, float t, std::vector<zigsimdata>* zsds)
 
     return floor(color * 20.f) / 20.f;
 }
+
+int isNum(int num, int value)
+{
+    return step(num, value) - step(num + 1.f, value);
+}
+
+vec3 Race(vec3 uv, float t, std::vector<zigsimdata>* zsds)
+{
+    float rotate = 0;
+    vec3 pos = 0;
+
+    if(zsds->size() > 0)
+    {
+        sensordata sd = zsds->operator[](0)._sensorData;
+        rotate = radians(sd.compass);
+        pos = vec3(sd.touch.x, (sin(t / 10.f) * 0.5f + 0.5f) * 0.25f + 0.15f, -sd.touch.y);
+    } 
+    else 
+    {
+        pos = vec3(sin(t / 50.f) * 0.45f, 0.3f * (sin(t / 10.f) * 0.5f + 0.5f) + 0.05f, cos(t / 50.f) * 0.45f);
+        rotate = atan2(-pos.x, -pos.z);
+    }
+
+    float defY = uv.y;
+
+    float calY = pos.y / (1 - defY);
+
+    uv -= 0.5f;
+    uv = quatXvec3(angleAxis2Quat(rotate, vec3(0, 0, 1)), uv);
+    uv *= calY;
+    uv += 0.5f;
+    uv.z = 0;
+
+    uv += vec3(pos.x, pos.z, 0);
+
+    int mapCount = 10;
+    int map[10][10] = 
+    {
+        {0, 2, 1, 1, 4, 0, 0, 0, 0, 0},
+        {0, 1, 0, 0, 1, 0, 0, 6, 0, 0},
+        {0, 3, 4, 0, 3, 1, 1, 4, 6, 0},
+        {0, 0, 1, 6, 0, 0, 0, 3, 4, 0},
+        {2, 1, 1, 4, 6, 0, 0, 0, 1, 0},
+        {1, 1, 6, 3, 1, 4, 6, 0, 1, 0},
+        {3, 1, 6, 6, 6, 3, 4, 0, 1, 0},
+        {6, 1, 1, 1, 4, 6, 1, 0, 1, 0},
+        {0, 1, 1, 6, 1, 1, 1, 1, 5, 0},
+        {0, 3, 1, 1, 1, 5, 6, 0, 0, 0},
+    };    
+
+    uv *= mapCount;
+    vec3 flooruv = floor(uv);
+    uv = fract(uv);
+    
+    uv -= 0.5f;
+    uv *= 2.f;
+    uv += 0.065f;
+    
+    vec3 sand = vec3(0.4, 0.3, 0.07);
+    vec3 flat = vec3(0.9, 0.84, 0.29);
+
+    float treef = step(circle(uv, 0.2f), 1.f);
+    vec3 tree = treef * vec3(0.04, 0.4, 0.12) + (1.f - treef) * sand;
+
+    vec3 upharf = step(0.f, uv);
+    upharf.z = 0;
+    vec3 dwharf = 1.f - upharf;
+    dwharf.z = 0;
+
+    float circ = step(circle(uv, 0.4f), 1.f);
+    
+    float leupf = clamp(circ + upharf.x + dwharf.y, 0.f, 1.f);
+    vec3 leup = leupf * flat + (1.f - leupf) * sand;
+    float ledwf = clamp(circ + upharf.x + upharf.y, 0.f, 1.f);
+    vec3 ledw = ledwf * flat + (1.f - ledwf) * sand;
+    float riupf = clamp(circ + dwharf.x + dwharf.y, 0.f, 1.f);
+    vec3 riup = riupf * flat + (1.f - riupf) * sand;
+    float ridwf = clamp(circ + dwharf.x + upharf.y, 0.f, 1.f);
+    vec3 ridw = ridwf * flat + (1.f - ridwf) * sand;
+
+    int mapValueX = mapCount - (int)flooruv.y - 1;
+    int mapValueY = (int)flooruv.x;
+    int isIn = step(0, mapValueX) * step(mapValueX, mapCount - 1) * step(0, mapValueY) * step(mapValueY, mapCount - 1);
+    int mapValue = map[clamp(mapValueX, 0, mapCount - 1)][clamp(mapValueY, 0, mapCount - 1)];
+    
+    float skyY = 0.15f * (1.f - pos.y) + 0.85f;
+    float skyf = step(skyY, defY);
+    vec3 sky = skyf * vec3(0, 0.55, 0.72);
+
+    vec3 result = 
+       isNum(0, mapValue) * sand
+     + isNum(1, mapValue) * flat
+     + isNum(2, mapValue) * leup
+     + isNum(3, mapValue) * ledw
+     + isNum(4, mapValue) * riup
+     + isNum(5, mapValue) * ridw
+     + isNum(6, mapValue) * tree;
+    
+    result *= isIn;
+    result += (1 - isIn) * sand;
+
+    return result * step(defY, skyY) + sky * (1.f - step(defY, skyY));
+}
