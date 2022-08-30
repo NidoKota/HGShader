@@ -19,8 +19,10 @@ HGShaderはそんなニッチで意味不明な需要を満たすプログラム
 初期状態の50x50ピクセルで2500個のHgBoxFillが表示されます<br>
 FPS数(FramePerSecond)を稼ぐためにいくつかの軽量化も行っています<br>
 
-# 紹介動画
-https://user-images.githubusercontent.com/36328961/125702413-61206a6e-7483-4179-ba0f-f18752d57c3d.mp4
+# 紹介動画(音声あり)
+https://youtu.be/iH3fcqRXDGA
+
+https://user-images.githubusercontent.com/36328961/187556241-1ba412bb-792e-46b2-b24c-7ca515c44959.mp4
 
 # サンプルの起動方法
 サンプルをコンパイル後、HandyGraphicを起動させた状態で、実行ファイル(`build/app`)を実行します<br>
