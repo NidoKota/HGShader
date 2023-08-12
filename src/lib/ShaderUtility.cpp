@@ -489,9 +489,10 @@ vec4 quatXquat(const vec4 l, const vec4 r)
     return mul4x4444(r, v444);
 }
 
-vec3 quatXvec3(const vec4 l, const vec3 r)
+vec3 quatXvec3(vec4 l, const vec3 r)
 {
-    return quatXquat(quatXquat(l, vec4(r, 0)), quatInverse(l)).xyz();
+    return r + cross(2 * l.xyz(), cross(l.xyz(), r) + l.w * r);
+    // return quatXquat(quatXquat(l, vec4(r, 0)), quatInverse(l)).xyz();
 }
 
 vec4 quatInverse(const vec4 q)
